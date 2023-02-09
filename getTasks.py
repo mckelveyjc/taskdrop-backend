@@ -88,8 +88,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             #     "foo": "bar"
             # }
             # }
-            responseBody = searchDatabase(response["userName"], response["password"])
-            # responseBody = response
+            # responseBody = searchDatabase(response["userName"], response["password"])
+            responseBody = response
             # puts user information in the database (good enough for now)
             # databaseInsert(response["userName"], response["email"], response["password"])
 
