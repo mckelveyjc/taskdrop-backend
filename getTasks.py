@@ -88,8 +88,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             #     "foo": "bar"
             # }
             # }
-            responseBody = getTasksFromDB(response["userName"], response["password"])
-            responseBody = response
+            # responseBody = getTasksFromDB(response["userName"], response["password"])
+            responseBody = "cat"
             # puts user information in the database (good enough for now)
             # databaseInsert(response["userName"], response["email"], response["password"])
 
