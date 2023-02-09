@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-def getTasksFromDB(userName, userPassword):
+def getTasksFromDB():
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -15,14 +15,9 @@ def getTasksFromDB(userName, userPassword):
             cursor.execute("select database();")
             record = cursor.fetchone()
             # print("You're connected to database: ", record)
-            cursor.execute("select userName from users where userName=%s and userPassword=%s", (userName, userPassword))
+            cursor.execute("SELECT * FROM tasks;")
             data = cursor.fetchall()
-            if not data:
-                print ('incorrect username or password')
-                return False
-            else:
-                print ('welcome!')
-                return True
+            return data
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
