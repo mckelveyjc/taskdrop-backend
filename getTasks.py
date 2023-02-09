@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-# from databaseInsert import databaseInsert
+from getTasksFromDB import getTasksFromDB
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -88,7 +88,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             #     "foo": "bar"
             # }
             # }
-            responseBody = response
+            responseBody = searchDatabase(response["userName"], response["password"])
+            # responseBody = response
             # puts user information in the database (good enough for now)
             # databaseInsert(response["userName"], response["email"], response["password"])
 
