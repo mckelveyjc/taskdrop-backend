@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from databaseInsert import databaseInsert
+# from databaseInsert import databaseInsert
 
 logging.basicConfig(level=logging.DEBUG)
 
