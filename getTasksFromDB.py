@@ -16,8 +16,8 @@ def getTasksFromDB(taskUserID):
             cursor.execute("select database();")
             record = cursor.fetchone()
             # print("You're connected to database: ", record)
-            # cursor.execute("select * from tasks where taskUser=%s;", (taskUserID))
-            cursor.execute("select * from tasks")
+            cursor.execute("select * from tasks where taskUser=%i;", (1))
+            # cursor.execute("select * from tasks")
             data = cursor.fetchall()
             return data
     except Error as e:
