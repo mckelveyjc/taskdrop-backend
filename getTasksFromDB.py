@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-def getTasksFromDB(userID):
+def getTasksFromDB(taskUserID):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -15,7 +15,7 @@ def getTasksFromDB(userID):
             cursor.execute("select database();")
             record = cursor.fetchone()
             # print("You're connected to database: ", record)
-            cursor.execute("select * from tasks where userID=%s", (userID))
+            cursor.execute("select * from tasks where taskUser=%s", (taskUserID))
             data = cursor.fetchall()
             return data
     except Error as e:
