@@ -16,7 +16,7 @@ def getTasksFromDB(taskUserID):
             cursor.execute("select database();")
             record = cursor.fetchone()
             # print("You're connected to database: ", record)
-            cursor.execute("select * from tasks where taskUser=%i;", (1))
+            cursor.execute("select * from tasks where taskUser='1'")
             # cursor.execute("select * from tasks")
             data = cursor.fetchall()
             return data
