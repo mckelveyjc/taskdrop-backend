@@ -17,7 +17,7 @@ def getTasksFromDB(taskUserID):
             record = cursor.fetchone()
             # print("You're connected to database: ", record)
             # cursor.execute("select * from tasks where taskDay='monday'")
-            cursor.execute("select * from tasks where taskDay=?", (1))
+            cursor.execute("select * from tasks where taskUser=?", (1))
             # cursor.execute("select * from tasks")
             data = cursor.fetchall()
             return data
