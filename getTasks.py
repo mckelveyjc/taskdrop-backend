@@ -79,8 +79,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-
-            responseBody = getTasksFromDB(response["taskUser"]) # eventually this should be taskUserID
+            # eventually this should be taskUserID
+            # responseBody = getTasksFromDB(response["taskUser"]) 
             # get all tasks from db
             # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
             #   certain user
