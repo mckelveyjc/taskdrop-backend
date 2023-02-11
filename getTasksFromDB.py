@@ -1,8 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-def getTasksFromDB(taskUserID):
-    taskUserID = int(taskUserID)
+def getTasksFromDB():
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -16,9 +15,10 @@ def getTasksFromDB(taskUserID):
             cursor.execute("select database();")
             record = cursor.fetchone()
             # print("You're connected to database: ", record)
-            # cursor.execute("select * from tasks where taskDay='monday'")
-            cursor.execute("select * from tasks where taskUser=?", (1))
-            # cursor.execute("select * from tasks")
+            # we'll do the below eventually. for some reason it keep returning null
+            # cursor.execute("select * from tasks where taskUser=?", (1))
+            # we'll do the below instead for now
+            cursor.execute("select * from tasks")
             data = cursor.fetchall()
             return data
     except Error as e:

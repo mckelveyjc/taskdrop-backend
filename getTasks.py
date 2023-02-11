@@ -76,31 +76,15 @@ class BaseAppService(BaseHTTPRequestHandler):
         elif path == '/get-tasks':
 
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-
-            # responseBody['data'] = "Post request received!."
-            # databaseInsert("testUserName", "testEmail", "testPassword")
             
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-            # the above line makes the data look like this:
-            # {
-            # "data": {
-            #     "foo": "bar"
-            # }
-            # }
+
             responseBody = getTasksFromDB(response["taskUser"]) # eventually this should be taskUserID
-            # puts user information in the database (good enough for now)
-            # databaseInsert(response["userName"], response["email"], response["password"])
-
-            # responseBody['f_name'] = response['f_name']
-            # responseBody['l_name'] = response['l_name']
-            # responseBody['dob'] = response['dob']
-            # responseBody['email'] = response['email']
-            # responseBody['pw'] = response['pw']
-
-            # testDBInsert = DBInsert()
-            # responseBody['inputted-insert'] = testDBInsert.insert_inputted_data(
-            #     responseBody)
+            # get all tasks from db
+            # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
+            #   certain user
+            responseBody = getTasksFromDB()
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
