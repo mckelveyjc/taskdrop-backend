@@ -46,7 +46,7 @@ class BaseAppService(BaseHTTPRequestHandler):
         if '/update-task' in path:
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
 
-            response = "Python service is up and running!"
+            response = "Python service is up and running!!!"
 
             responseBody['data'] = response
 
