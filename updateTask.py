@@ -73,21 +73,21 @@ class BaseAppService(BaseHTTPRequestHandler):
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             responseBody['data'] = 'Hello world'
 
-        elif path == '/update-task': # this works!
-        # we'll include the rest (/update-task/delete, /change-time) later
-        # elif path == 'update-task/update-day': # should be update-task-day
+        # elif path == '/update-task': # this works!
+        # # we'll include the rest (/update-task/delete, /change-time) later
+        # # elif path == 'update-task/update-day': # should be update-task-day
 
-            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+        #     status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             
-            dataString = json.dumps(postBody)
-            response = ast.literal_eval(dataString)
-            # eventually this should be taskUserID
-            # responseBody = getTasksFromDB(response["taskUser"]) 
-            # get all tasks from db
-            # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
-            #   certain user
-            # responseBody = getTasksFromDB()
-            responseBody = "cat"
+        #     dataString = json.dumps(postBody)
+        #     response = ast.literal_eval(dataString)
+        #     # eventually this should be taskUserID
+        #     # responseBody = getTasksFromDB(response["taskUser"]) 
+        #     # get all tasks from db
+        #     # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
+        #     #   certain user
+        #     # responseBody = getTasksFromDB()
+        #     responseBody = "cat"
         
         # testing
         elif path == '/update-task/update-day':
