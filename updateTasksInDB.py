@@ -35,3 +35,5 @@ def updateTaskDay(taskID, newDay):
             cursor.close()
             connection.close()
             # print("MySQL connection is closed")
+
+updateTaskDay(2, "wednesday")
