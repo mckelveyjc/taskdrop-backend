@@ -21,8 +21,8 @@ def createTask(taskUser):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, 'to-do', '', '', '')"
-            values = (taskUser)
+            sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
+            values = (taskUser, "to-do", "new-task", "new-task", "new-task")
             cursor.execute(sqlAddTaskQuery, values)
             connection.commit()
 
