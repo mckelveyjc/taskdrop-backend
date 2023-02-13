@@ -2,7 +2,8 @@ import mysql.connector
 from mysql.connector import Error
 # eventually: rework this into a class so I can reuse sql connection code in __init__
 
-def createTask(taskUser, taskName, taskDay, taskStart, taskEnd):
+# adds taskUser & taskLocation (as "to-do") but leaves everything else blank
+def createTask(taskUser):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -20,8 +21,8 @@ def createTask(taskUser, taskName, taskDay, taskStart, taskEnd):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
-            values = (taskUser, taskName, taskDay, taskStart, taskEnd)
+            sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, 'to-do', '', '', '')"
+            values = (taskUser)
             cursor.execute(sqlAddTaskQuery, values)
             connection.commit()
 
