@@ -91,7 +91,7 @@ class BaseAppService(BaseHTTPRequestHandler):
         #     # responseBody = getTasksFromDB()
         #     responseBody = "cat"
         
-        elif path == '/update-task/change-day':
+        elif path == '/update-task/update-day':
             # we'll include the rest (/update-task/delete, /change-time) later
             # should be update-task-day
 
@@ -104,7 +104,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             response = ast.literal_eval(dataString)
             
             # testing
-            updateTaskDay(2, "wednesday")
+            updateTaskDay("2", "wednesday")
 
             responseBody = "cattt"
 
