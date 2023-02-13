@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from updateTasksInDB import updateTaskDay, createTask
+from updateTasksInDB import createTask, updateTaskName, updateTaskDay
 
 logging.basicConfig(level=logging.DEBUG)
 
