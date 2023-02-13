@@ -93,12 +93,12 @@ class BaseAppService(BaseHTTPRequestHandler):
         
         elif path == '/update-task/create-task':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-            
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
 
             createTask(response["taskUser"])
 
+            # testing shit:
             # createTask("1", "created-task", "testday", "00:00", "00:01")
             # createTask(
             #     response["taskUser"], 
@@ -108,6 +108,15 @@ class BaseAppService(BaseHTTPRequestHandler):
             #     response["taskEnd"])
             # responseBody = "/update-task/create-task"
 
+        elif path == '/update-task/update-name':
+            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+            dataString = json.dumps(postBody)
+            response = ast.literal_eval(dataString)
+
+            
+            # testing shit:
+            responseBody = "/update-task/update-name"
+
         elif path == '/update-task/update-day':
             # we'll include the rest (/update-task/delete, /change-time) later
             # should be update-task-day
@@ -116,7 +125,6 @@ class BaseAppService(BaseHTTPRequestHandler):
             # need to update the task day in the database
             # something like: updateTasksInDB("change-day", "new-day")
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-            
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
             
