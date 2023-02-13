@@ -39,8 +39,8 @@ def createTask(taskUser):
             connection.close()
             # print("MySQL connection is closed")
 
-# adds taskUser & taskLocation (as "to-do") but leaves everything else blank
-def updateTaskName(newTaskName):
+# updates the name of the task in the DB
+def updateTaskName(taskID, newName):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -57,10 +57,9 @@ def updateTaskName(newTaskName):
             # we'll do the below eventually. for some reason it keep returning null
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
-            
-            sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
-            values = (taskUser, "to-do", "new-task", "new-task", "new-task")
-            cursor.execute(sqlAddTaskQuery, values)
+            sqlChangeNameQuery = "update tasks set taskName=%s where taskID=%s;"
+            values = (newName, taskID)
+            cursor.execute(sqlChangeNameQuery, values)
             connection.commit()
 
             # testing

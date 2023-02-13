@@ -113,9 +113,9 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
 
-            
+            updateTaskDay(response["taskID"], response["newName"])
             # testing shit:
-            responseBody = "/update-task/update-name"
+            # responseBody = "/update-task/update-name"
 
         elif path == '/update-task/update-day':
             # we'll include the rest (/update-task/delete, /change-time) later
