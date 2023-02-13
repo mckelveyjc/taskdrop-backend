@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from getTasksFromDB import getTasksFromDB
+from updateTasksInDB import *
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -73,7 +73,9 @@ class BaseAppService(BaseHTTPRequestHandler):
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             responseBody['data'] = 'Hello world'
 
-        # elif path == '/update-task': # this works!
+        # keeping the below here just because NGINX is wierd sometimes and needs a path to match
+        #  exactly what's in sites-available
+        # elif path == '/update-task': 
         # # we'll include the rest (/update-task/delete, /change-time) later
         # # elif path == 'update-task/update-day': # should be update-task-day
 
@@ -89,21 +91,21 @@ class BaseAppService(BaseHTTPRequestHandler):
         #     # responseBody = getTasksFromDB()
         #     responseBody = "cat"
         
-        # testing
-        elif path == '/update-task/update-day':
+        elif path == '/update-task/change-day':
             # we'll include the rest (/update-task/delete, /change-time) later
-            # elif path == 'update-task/update-day': # should be update-task-day
+            # should be update-task-day
 
+            # need to take the taskID as a parameter
+            # need to update the task day in the database
+            # something like: updateTasksInDB("change-day", "new-day")
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-            # eventually this should be taskUserID
-            # responseBody = getTasksFromDB(response["taskUser"]) 
-            # get all tasks from db
-            # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
-            #   certain user
-            # responseBody = getTasksFromDB()
+            
+            # testing
+            updateTaskDay(2, "wednesday")
+
             responseBody = "cattt"
 
         self.send_response(status)
