@@ -20,11 +20,11 @@ def updateTaskDay(taskID, newDay):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            # cursor.execute("update tasks set taskDay=%s where taskID=%s;" (newDay, taskID))
-            sql_update_query = """update tasks set taskDay = 'wednesday' where taskID = 2"""
+            cursor.execute("update tasks set taskDay=%s where taskID=%s;" (newDay, taskID))
+            # sql_update_query = """update tasks set taskDay = 'wednesday' where taskID = 2"""
             cursor.execute(sql_update_query)
             connection.commit()
-            
+
             # testing
             # cursor.execute("select * from tasks")
             
