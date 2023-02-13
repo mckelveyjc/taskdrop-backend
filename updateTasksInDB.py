@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 # eventually: rework this into a class so I can reuse sql connection code in __init__
 
-def createTask(taskID, newDay):
+def createTask(taskUser, taskName, taskDay, taskStart, taskEnd):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -20,10 +20,9 @@ def createTask(taskID, newDay):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            sql_update_query = "update tasks set taskDay=%s where taskID=%s;"
-            values = (newDay, taskID)
-            # sql_update_query = """update tasks set taskDay = 'wednesday' where taskID = 2"""
-            cursor.execute(sql_update_query, values)
+            sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
+            values = (taskUser, taskName, taskDay, taskStart, taskEnd)
+            cursor.execute(sqlAddTaskQuery, values)
             connection.commit()
 
             # testing
@@ -58,10 +57,10 @@ def updateTaskDay(taskID, newDay):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            sql_update_query = "update tasks set taskDay=%s where taskID=%s;"
+            sqlUpdateQuery = "update tasks set taskDay=%s where taskID=%s;"
             values = (newDay, taskID)
             # sql_update_query = """update tasks set taskDay = 'wednesday' where taskID = 2"""
-            cursor.execute(sql_update_query, values)
+            cursor.execute(sqlUpdateQuery, values)
             connection.commit()
 
             # testing
@@ -78,3 +77,4 @@ def updateTaskDay(taskID, newDay):
             # print("MySQL connection is closed")
 
 
+createTask("1", "created-task", "testday", "00:00", "00:01")
