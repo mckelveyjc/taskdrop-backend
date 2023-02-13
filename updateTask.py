@@ -104,7 +104,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
             #   certain user
             # responseBody = getTasksFromDB()
-            responseBody = "cat"
+            responseBody = "cattt"
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
