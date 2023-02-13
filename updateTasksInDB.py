@@ -21,7 +21,7 @@ def updateTaskDay(taskID, newDay):
             # we'll do the below instead for now
             
             # cursor.execute("update tasks set taskDay=%s where taskID=%s;" (newDay, taskID))
-            cursor.execute("update tasks set taskDay='wednesday' where taskID=%i;" (2))
+            cursor.execute("update tasks set taskDay='wednesday' where taskID=%i;", (2))
             
             # testing
             cursor.execute("select * from tasks")
