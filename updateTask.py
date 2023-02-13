@@ -104,7 +104,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             response = ast.literal_eval(dataString)
             
             # testing
-            updateTaskDay("2", "wednesday")
+            updateTasksInDB.updateTaskDay("2", "wednesday")
 
             responseBody = "cattt"
 
