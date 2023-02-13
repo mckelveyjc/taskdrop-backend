@@ -113,7 +113,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
 
-            updateTaskDay(response["taskID"], response["newName"])
+            updateTaskName(response["taskID"], response["newName"])
             # testing shit:
             # responseBody = "/update-task/update-name"
 
