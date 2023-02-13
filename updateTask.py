@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from updateTasksInDB import *
+from updateTasksInDB import updateTaskDay
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -104,7 +104,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             response = ast.literal_eval(dataString)
             
             # testing
-            updateTasksInDB.updateTaskDay("2", "wednesday")
+            updateTaskDay("2", "wednesday")
 
             responseBody = "cattt"
 
