@@ -96,7 +96,14 @@ class BaseAppService(BaseHTTPRequestHandler):
             
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-            createTask("1", "created-task", "testday", "00:00", "00:01")
+            # createTask("1", "created-task", "testday", "00:00", "00:01")
+
+            createTask(
+                response["taskUser"], 
+                response["taskName"], 
+                response["taskDay"], 
+                response["taskStart"], 
+                response["taskEnd"])
 
             # responseBody = "/update-task/create-task"
 

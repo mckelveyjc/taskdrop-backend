@@ -77,4 +77,4 @@ def updateTaskDay(taskID, newDay):
             # print("MySQL connection is closed")
 
 
-createTask("1", "created-task", "testday", "00:00", "00:01")
+# createTask("1", "created-task", "testday", "00:00", "00:01")
