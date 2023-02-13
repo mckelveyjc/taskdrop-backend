@@ -73,9 +73,9 @@ class BaseAppService(BaseHTTPRequestHandler):
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             responseBody['data'] = 'Hello world'
 
-        # elif path == '/update-task': this works!
+        elif path == '/update-task': this works!
         # we'll include the rest (/update-task/delete, /change-time) later
-        elif path == 'update-task/update-day': # should be update-task-day
+        # elif path == 'update-task/update-day': # should be update-task-day
 
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             
