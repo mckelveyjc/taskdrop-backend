@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from updateTasksInDB import updateTaskDay
+from updateTasksInDB import updateTaskDay, createTask
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -91,6 +91,14 @@ class BaseAppService(BaseHTTPRequestHandler):
         #     # responseBody = getTasksFromDB()
         #     responseBody = "cat"
         
+        elif path == '/update-task/create-task':
+            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+            
+            dataString = json.dumps(postBody)
+            response = ast.literal_eval(dataString)
+            
+            responseBody = "/update-task/create-task"
+
         elif path == '/update-task/update-day':
             # we'll include the rest (/update-task/delete, /change-time) later
             # should be update-task-day
@@ -103,10 +111,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
             
-            # testing
             updateTaskDay(response["taskID"], response["newDay"])
-
-            responseBody = "cattt"
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
