@@ -22,7 +22,7 @@ def createTask(taskUser):
             # we'll do the below instead for now
             
             sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
-            values = (taskUser, "to-do", "new-task", "new-task", "new-task")
+            values = (taskUser, "to-do", "to-do-list", "new-task", "new-task")
             cursor.execute(sqlAddTaskQuery, values)
             connection.commit()
 

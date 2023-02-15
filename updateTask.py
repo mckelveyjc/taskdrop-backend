@@ -96,7 +96,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
 
-            createTask(response["taskUser"])
+            createTask(response["taskUser"]) # should probably be "taskUserID"
 
             # testing shit:
             # createTask("1", "created-task", "testday", "00:00", "00:01")
