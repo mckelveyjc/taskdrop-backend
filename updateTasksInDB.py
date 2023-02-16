@@ -117,4 +117,4 @@ def updateTaskDay(taskID, newDay):
             # print("MySQL connection is closed")
 
 
-createTask("1")
+# createTask("1")
