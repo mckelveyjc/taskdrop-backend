@@ -23,9 +23,12 @@ def createTask(taskUser):
             
             sqlAddTaskQuery = "insert into tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
             values = (taskUser, "to-do", "to-do-list", "new-task", "new-task")
+            # change "to-do" to "(new task)" or whatever it is on the front-end next time you edit this file
             cursor.execute(sqlAddTaskQuery, values)
             connection.commit()
 
+            # send back the taskID of the most recently created task (so we can render it on the FE)
+            cursor.execute("select MAX(taskID)")
             # testing
             # cursor.execute("select * from tasks")
             
