@@ -28,7 +28,7 @@ def createTask(taskUser):
             connection.commit()
 
             # send back the taskID of the most recently created task (so we can render it on the FE)
-            cursor.execute("select MAX(taskID)")
+            cursor.execute("select MAX(taskID) from tasks")
             # testing
             # cursor.execute("select * from tasks")
             
