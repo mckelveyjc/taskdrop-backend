@@ -1,5 +1,5 @@
 import os
-import openai
+# import openai
 import random
 from getTasksFromDB import getTasksForPrompt
 
@@ -11,6 +11,7 @@ def createPrompt():
     # [('feed the dog',), ('eat veggies',), ('c',)]
     # print(getTasksForPrompt()[0][0])
 
+    randomTaskList = []
     randomTasksAsTuples = getTasksForPrompt()
     for task in randomTasksAsTuples:
         randomTaskList.append(randomTasksAsTuples[0][0])
