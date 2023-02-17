@@ -1,5 +1,5 @@
 import os
-# import openai
+import openai
 import random
 from getTasksFromDB import getTasksForPrompt
 
@@ -34,12 +34,14 @@ def createPrompt():
 # this function takes the prompt and sends a request for an AI generated image to openAI
 def openAIArtRequest():
     # openai.api_key = os.getenv("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")
+    generatedPrompt = createPrompt()
     openai.api_key = "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"
-    image = openai.Image.create(
-        prompt="A cute baby sea otter",
+    generatedImage = openai.Image.create(
+        prompt= generatedPrompt,
         n=1,
         size="1024x1024"
     )
-    print(image)
+    return generatedImage
 
-print(createPrompt())
+print(openAIArtRequest)
+# print(createPrompt())
