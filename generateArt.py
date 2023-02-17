@@ -45,4 +45,4 @@ def openAIArtRequest():
     )
     print(image)
 
-createPrompt()
+print(createPrompt())
