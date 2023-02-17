@@ -58,4 +58,4 @@ def getTasksForPrompt():
             cursor.close()
             connection.close()
             # print("MySQL connection is closed")
-print(getTasksForPrompt())
+print(getTasksForPrompt()[0][0])
