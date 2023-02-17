@@ -14,9 +14,9 @@ def createPrompt():
     randomTaskList = []
     prompt = ""
     randomTasksAsTuples = getTasksForPrompt()
-    for task in randomTasksAsTuples:
+    for taskIndex in range(randomTasksAsTuples):
         randomTaskList.append(randomTasksAsTuples[0][0])
-        prompt += randomTasksAsTuples[0][0] + ", "
+        prompt += randomTasksAsTuples[taskIndex][0] + ", "
 
     randomArtStyleList = [
         "picasso", 

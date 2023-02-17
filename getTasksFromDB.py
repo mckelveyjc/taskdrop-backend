@@ -33,6 +33,7 @@ def getTasksFromDB():
 # this function gets three random tasks from the "recently_completed_tasks" table 
 # will be used in generateArt. 
 # for now I'm getting the tasks from the normal "tasks" table just for testing
+# eventually we should orchestrate this so that it doesn't get repeated tasks
 def getTasksForPrompt():
     try:
         connection = mysql.connector.connect(
