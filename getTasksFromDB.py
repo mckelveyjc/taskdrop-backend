@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
+# needs to be renamed to "get all tasks from db"
 def getTasksFromDB():
     try:
         connection = mysql.connector.connect(
@@ -28,3 +29,33 @@ def getTasksFromDB():
             cursor.close()
             connection.close()
             # print("MySQL connection is closed")
+
+# this function gets three random tasks from the "recently_completed_tasks" table 
+# will be used in generateArt. 
+# for now I'm getting the tasks from the normal "tasks" table just for testing
+def getTasksForPrompt():
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='test_db',
+            user='python',
+            password='cosc4360')
+        if connection.is_connected():
+            db_Info = connection.get_server_info()
+            # print("Connected to MySQL Server version ", db_Info)
+            cursor = connection.cursor()
+            cursor.execute("select database()")
+            record = cursor.fetchone()
+
+            # now let's select three random tasks
+            cursor.execute("select taskName from tasks order by rand() limit 3;")
+            data = cursor.fetchall()
+            return data
+    except Error as e:
+        print("Error while connecting to MySQL", e)
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            # print("MySQL connection is closed")
+print(getTasksForPrompt())
