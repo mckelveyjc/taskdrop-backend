@@ -29,10 +29,7 @@ def createPrompt():
     ]
 
     prompt += "in the style of " + random.choice(randomArtStyleList)
-
-
-    # random art styles: picasso, van gohg, rembrant, etc
-    pass
+    return prompt
 
 # this function takes the prompt and sends a request for an AI generated image to openAI
 def openAIArtRequest():
