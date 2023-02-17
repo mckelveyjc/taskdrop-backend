@@ -43,5 +43,5 @@ def openAIArtRequest():
     )
     return generatedImage
 
-print(openAIArtRequest)
+print(openAIArtRequest())
 # print(createPrompt())
