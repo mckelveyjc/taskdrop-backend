@@ -11,11 +11,9 @@ def createPrompt():
     # [('feed the dog',), ('eat veggies',), ('c',)]
     # print(getTasksForPrompt()[0][0])
 
-    randomTaskList = []
     prompt = ""
     randomTasksAsTuples = getTasksForPrompt()
     for taskIndex in range(len(randomTasksAsTuples)):
-        randomTaskList.append(randomTasksAsTuples[0][0])
         prompt += randomTasksAsTuples[taskIndex][0] + ", "
 
     randomArtStyleList = [
@@ -24,7 +22,8 @@ def createPrompt():
         "rembrandt", 
         "cyber punk",
         "medieval",
-        "wild west"
+        "wild west", 
+        "a 90s sitcom"
         # any other crazy shit we can think of
     ]
 
@@ -36,12 +35,13 @@ def openAIArtRequest():
     # openai.api_key = os.getenv("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")
     generatedPrompt = createPrompt()
     openai.api_key = "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"
-    generatedImage = openai.Image.create(
+    generatedImageData = openai.Image.create(
         prompt= generatedPrompt,
         n=1,
         size="1024x1024"
     )
-    return generatedImage
+    generatedImageUrl = generatedImageData["data"]["url"]
+    return generatedImageUrl
 
-print(openAIArtRequest())
+# print(openAIArtRequest())
 # print(createPrompt())
