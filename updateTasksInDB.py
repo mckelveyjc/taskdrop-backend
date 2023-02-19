@@ -135,16 +135,16 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskID, taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s, %s)"
-            values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
-            cursor.execute(sqlCompleteTaskQuery, values)
-            connection.commit()
+            # sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskID, taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s, %s)"
+            # values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
+            # cursor.execute(sqlCompleteTaskQuery, values)
+            # connection.commit()
 
             sqlDeleteTaskQuery = "delete from tasks where taskID=%s"
             values = (taskID)
             cursor.execute(sqlDeleteTaskQuery, values)
             connection.commit()
-            
+
             data = cursor.fetchall()
             return data
 
