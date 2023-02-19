@@ -135,7 +135,7 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # cursor.execute("select * from tasks where taskUser=?", (1))
             # we'll do the below instead for now
             
-            sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
+            sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskID, taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s, %s)"
             values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
             # change "to-do" to "(new task)" or whatever it is on the front-end next time you edit this file
             cursor.execute(sqlCompleteTaskQuery, values)
