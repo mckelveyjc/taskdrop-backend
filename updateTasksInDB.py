@@ -116,5 +116,39 @@ def updateTaskDay(taskID, newDay):
             connection.close()
             # print("MySQL connection is closed")
 
+# adds taskUser & taskLocation (as "to-do") but leaves everything else blank
+def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='test_db',
+            user='python',
+            password='cosc4360')
+        if connection.is_connected():
+            db_Info = connection.get_server_info()
+            # print("Connected to MySQL Server version ", db_Info)
+            cursor = connection.cursor()
+            cursor.execute("select database();")
+            record = cursor.fetchone()
+            # print("You're connected to database: ", record)
+            # we'll do the below eventually. for some reason it keep returning null
+            # cursor.execute("select * from tasks where taskUser=?", (1))
+            # we'll do the below instead for now
+            
+            sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s)"
+            values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
+            # change "to-do" to "(new task)" or whatever it is on the front-end next time you edit this file
+            cursor.execute(sqlCompleteTaskQuery, values)
+            connection.commit()
+            data = cursor.fetchall()
+            return data
+    except Error as e:
+        print("Error while connecting to MySQL", e)
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            # print("MySQL connection is closed")
 
 # createTask("1")
+completeTask("159", "1", "to-do", "to-do-list", "new-task", "new-task")

@@ -130,6 +130,15 @@ class BaseAppService(BaseHTTPRequestHandler):
             response = ast.literal_eval(dataString)
             
             updateTaskDay(response["taskID"], response["newDay"])
+        
+        elif path == '/update-task/complete-task':
+            # we need to take all of the tasks information here so we can move it all to 
+            #  the other database. 
+            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+            dataString = json.dumps(postBody)
+            response = ast.literal_eval(dataString)
+            
+            updateTaskDay(response["taskID"], response["newDay"])
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
