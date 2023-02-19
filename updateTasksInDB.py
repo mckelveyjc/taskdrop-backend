@@ -140,9 +140,8 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # cursor.execute(sqlCompleteTaskQuery, values)
             # connection.commit()
 
-            sqlDeleteTaskQuery = "delete from %s where taskID=%s"
-            values = ("tasks", taskID)
-            cursor.execute(sqlDeleteTaskQuery, values)
+            sqlDeleteTaskQuery = "delete from tasks where taskID=%s"
+            cursor.execute(sqlDeleteTaskQuery, taskID)
             connection.commit()
 
             data = cursor.fetchall()
