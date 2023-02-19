@@ -137,11 +137,16 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             
             sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskID, taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s, %s)"
             values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
-            # change "to-do" to "(new task)" or whatever it is on the front-end next time you edit this file
             cursor.execute(sqlCompleteTaskQuery, values)
+
+            sqlDeleteTaskQuery = "delete from tasks where taskID=%s"
+            values = (taskID)
+            cursor.execute(sqlDeleteTaskQuery, values)
+            
             connection.commit()
             data = cursor.fetchall()
             return data
+
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
@@ -151,4 +156,4 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # print("MySQL connection is closed")
 
 # createTask("1")
-completeTask("159", "1", "to-do", "to-do-list", "new-task", "new-task")
+# completeTask("159", "1", "to-do", "to-do-list", "new-task", "new-task")
