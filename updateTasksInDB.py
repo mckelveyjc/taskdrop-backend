@@ -140,8 +140,8 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # cursor.execute(sqlCompleteTaskQuery, values)
             # connection.commit()
 
-            sqlDeleteTaskQuery = "delete from tasks where taskID=%i"
-            values = (int(taskID))
+            sqlDeleteTaskQuery = "delete from tasks where taskID=%s"
+            values = (taskID)
             cursor.execute(sqlDeleteTaskQuery, values)
             connection.commit()
 
@@ -157,4 +157,4 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # print("MySQL connection is closed")
 
 # createTask("1")
-# completeTask("159", "1", "to-do", "to-do-list", "new-task", "new-task")
+completeTask("159", "1", "to-do", "to-do-list", "new-task", "new-task")
