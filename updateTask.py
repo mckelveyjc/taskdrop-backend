@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from updateTasksInDB import createTask, updateTaskName, updateTaskDay
+from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -138,7 +138,13 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
             
-            updateTaskDay(response["taskID"], response["newDay"])
+            completeTask(
+                response["taskID"], 
+                response["taskUser"],
+                response["taskName"],
+                response["taskDay"],
+                response["taskStart"],
+                response["taskEnd"])
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
