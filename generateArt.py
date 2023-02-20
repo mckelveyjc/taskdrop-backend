@@ -1,5 +1,5 @@
 import os
-# import openai
+import openai
 import random
 from getTasksFromDB import getTasksForPrompt
 
@@ -43,5 +43,5 @@ def openAIArtRequest():
     generatedImageUrl = generatedImageData["data"][0]["url"]
     return generatedImageUrl
 
-print(openAIArtRequest())
+# print(openAIArtRequest())
 # print(createPrompt())
