@@ -145,6 +145,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskDay"],
                 response["taskStart"],
                 response["taskEnd"])
+            
+            
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
