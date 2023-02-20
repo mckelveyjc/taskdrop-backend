@@ -130,15 +130,11 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             cursor = connection.cursor()
             cursor.execute("select database();")
             record = cursor.fetchone()
-            # print("You're connected to database: ", record)
-            # we'll do the below eventually. for some reason it keep returning null
-            # cursor.execute("select * from tasks where taskUser=?", (1))
-            # we'll do the below instead for now
-            
-            # sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskID, taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s, %s)"
-            # values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
-            # cursor.execute(sqlCompleteTaskQuery, values)
-            # connection.commit()
+ 
+            sqlCompleteTaskQuery = "insert into recently_completed_tasks (taskID, taskUser, taskName, taskDay, taskStart, taskEnd) values (%s, %s, %s, %s, %s, %s)"
+            values = (taskID, taskUser, taskName, taskDay, taskStart, taskEnd)
+            cursor.execute(sqlCompleteTaskQuery, values)
+            connection.commit()
 
             sqlDeleteTaskQuery = "delete from tasks where taskID=%s"
             cursor.execute(sqlDeleteTaskQuery, (taskID,))
@@ -156,4 +152,4 @@ def completeTask(taskID, taskUser, taskName, taskDay, taskStart, taskEnd):
             # print("MySQL connection is closed")
 
 # createTask("1")
-completeTask("161", "1", "to-do", "to-do-list", "new-task", "new-task")
+# completeTask("161", "1", "to-do", "to-do-list", "new-task", "new-task")
