@@ -147,7 +147,7 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskStart"],
                 response["taskEnd"])
             
-            numCompletedTasks = getNumCompletedTasks()
+            # numCompletedTasks = getNumCompletedTasks()
             # if (numCompletedTasks == 5):
             #     responseBody = openAIArtRequest()
 
