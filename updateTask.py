@@ -146,7 +146,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskStart"],
                 response["taskEnd"])
             
-            
+            # numCompletedTasks = getNumCompletedTasks()
+
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")

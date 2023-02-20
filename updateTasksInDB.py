@@ -169,7 +169,7 @@ def getNumCompletedTasks():
             cursor.execute(sqlCountTasksQuery)
 
             data = cursor.fetchall()
-            return data
+            return data[0][0]
 
     except Error as e:
         print("Error while connecting to MySQL", e)
