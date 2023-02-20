@@ -4,7 +4,8 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask
+from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
+from generateArt import openAIArtRequest
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -146,7 +147,9 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskStart"],
                 response["taskEnd"])
             
-            # numCompletedTasks = getNumCompletedTasks()
+            numCompletedTasks = getNumCompletedTasks()
+            if (numCompletedTasks == 5):
+                responseBody = openAIArtRequest()
 
 
         self.send_response(status)

@@ -49,7 +49,8 @@ def getTasksForPrompt():
             record = cursor.fetchone()
 
             # now let's select three random tasks
-            cursor.execute("select taskName from tasks order by rand() limit 3;")
+            # cursor.execute("select taskName from tasks order by rand() limit 3;")
+            cursor.execute("select taskName from recently_completed_tasks order by rand() limit 3;")
             data = cursor.fetchall()
             return data
     except Error as e:
