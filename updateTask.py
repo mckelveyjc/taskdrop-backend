@@ -148,8 +148,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskEnd"])
             
             numCompletedTasks = getNumCompletedTasks()
-            if (numCompletedTasks == 5):
-                responseBody = openAIArtRequest()
+            # if (numCompletedTasks == 5):
+            #     responseBody = openAIArtRequest()
 
 
         self.send_response(status)
