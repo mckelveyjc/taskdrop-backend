@@ -4,7 +4,7 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from generateArt import createPrompt
+# from generateArt import createPrompt
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
 
 logging.basicConfig(level=logging.DEBUG)
@@ -147,8 +147,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskStart"],
                 response["taskEnd"])
             
-            # numCompletedTasks = getNumCompletedTasks()
-            # responseBody['data'] = numCompletedTasks
+            numCompletedTasks = getNumCompletedTasks()
+            responseBody['data'] = numCompletedTasks
             # if (numCompletedTasks == 5):
             #     responseBody['data'] = openAIArtRequest()
 
