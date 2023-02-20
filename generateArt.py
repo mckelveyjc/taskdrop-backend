@@ -43,5 +43,5 @@ def openAIArtRequest():
     generatedImageUrl = generatedImageData["data"]["url"]
     return generatedImageUrl
 
-# print(openAIArtRequest())
+print(openAIArtRequest())
 # print(createPrompt())
