@@ -1,5 +1,5 @@
 import os
-# import openai
+import openai
 import random
 from getTasksFromDB import getTasksForPrompt
 
