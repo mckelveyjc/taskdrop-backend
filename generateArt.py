@@ -40,8 +40,7 @@ def openAIArtRequest():
         n=1,
         size="1024x1024"
     )
-    # generatedImageUrl = generatedImageData["data"]["url"]
-    generatedImageUrl = generatedImageData
+    generatedImageUrl = generatedImageData["data"][0]["url"]
     return generatedImageUrl
 
 print(openAIArtRequest())
