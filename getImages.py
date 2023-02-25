@@ -70,9 +70,9 @@ class BaseAppService(BaseHTTPRequestHandler):
         # These path endpoints can be very picky sometimes, and are very much connected to how your DevOps
         # has configured your web server. You will need to communicate with your DevOps to decide on these
 
-        taskUserID = response["taskUserID"]
         if path == '/get-images':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+            taskUserID = response["taskUserID"]
             # imgFileNameArray = getImageNames(response["taskUserID"])
             # imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
             # responseBody['data'] = imgUrlArray
