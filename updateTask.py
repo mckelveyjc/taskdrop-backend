@@ -6,7 +6,7 @@ from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 from generateArt import createPrompt, openAIArtRequest
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
-from manageImages import saveBase64Image, cat
+# from manageImages import saveBase64Image, cat
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -157,7 +157,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
                 # saveBase64Image("1", generatedImageBase64)
-                responseBody['data'] = cat()
+                # responseBody['data'] = cat()
+                responseBody['data'] = "fish"
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
         self.send_response(status)
