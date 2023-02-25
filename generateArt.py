@@ -50,7 +50,7 @@ def openAIArtRequest():
     generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
 
     # testing
-    saveBase64Image("1", generatedImageBase64)
+    saveBase64Image("1", str(generatedImageBase64))
     return generatedImageBase64
 
 # print(openAIArtRequest())
