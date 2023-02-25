@@ -71,9 +71,9 @@ class BaseAppService(BaseHTTPRequestHandler):
         # has configured your web server. You will need to communicate with your DevOps to decide on these
 
         if path == '/get-images':
-            imgFileNameArray = getImageNames("1")
-            # imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+            imgFileNameArray = getImageNames(response["taskUserID"])
+            # imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
             # responseBody['data'] = imgUrlArray
             responseBody['data'] = "cat"
                 
