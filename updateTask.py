@@ -5,10 +5,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 from generateArt import openAIArtRequest
-# from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
 from manageImagesInDB import saveBase64Image
-# from manageImages import cat
 
 logging.basicConfig(level=logging.DEBUG)
 
