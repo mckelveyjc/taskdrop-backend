@@ -6,7 +6,7 @@ from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 import openai
 from generateArt import createPrompt, openAIArtRequest
-from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
+from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -150,9 +150,9 @@ class BaseAppService(BaseHTTPRequestHandler):
             
             numCompletedTasks = getNumCompletedTasks()
             responseBody['data'] = numCompletedTasks
-            if (numCompletedTasks >= 5): # should be === 5
+            if (numCompletedTasks >= 5): # should be === 5 eventually
                 responseBody['data'] = openAIArtRequest()
-
+                # clearRecentlyCompletedTasks() # do this when we're done testing
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
