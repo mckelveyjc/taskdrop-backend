@@ -2,6 +2,7 @@ import os
 import openai
 import random
 from getTasksFromDB import getTasksForPrompt
+from manageImages import saveBase64Image
 
 # this function takes three random tasks from the "recently_completed" table and generates an 
 #   prompt for the AI art generator based on that prompt
@@ -47,7 +48,10 @@ def openAIArtRequest():
     # generatedImageUrl = generatedImageData["data"][0]["url"]
     # return generatedImageUrl
     generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+
+    # testing
+    saveBase64Image("1", generatedImageBase64)
     return generatedImageBase64
 
-print(openAIArtRequest())
+# print(openAIArtRequest())
 # print(createPrompt())
