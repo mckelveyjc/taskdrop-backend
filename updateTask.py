@@ -158,8 +158,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
                 # saveBase64Image("1", generatedImageBase64)
-                # responseBody['data'] = cat()
-                responseBody['data'] = "fish"
+                responseBody['data'] = cat()
+                # responseBody['data'] = "fish"
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
         self.send_response(status)
