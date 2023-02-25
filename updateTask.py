@@ -6,7 +6,7 @@ from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 from generateArt import openAIArtRequest
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
-from manageImagesInDB import saveBase64Image
+from manageImagesInDB import addImgToDb, saveImage
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -165,8 +165,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # addImgToDb(taskUserID, generatedImageBase64)
                 # you'd also need something similar to this at the top:
                 # taskUserID = response["taskID"]
-                saveBase64Image("1", generatedImageBase64)
-
+                imageFileName = saveImage("1", generatedImageBase64)
+                addImgToDb("1", imageFileName)
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
