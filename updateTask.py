@@ -141,10 +141,10 @@ class BaseAppService(BaseHTTPRequestHandler):
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-            
+            taskUserID = response["taskID"]
             # save taskUser as a variable
             completeTask(
-                response["taskID"], 
+                taskUserID, 
                 response["taskUser"],
                 response["taskName"],
                 response["taskDay"],
@@ -160,9 +160,11 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # responseBody['data'] = generatedImageData
                 generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
                 # responseBody['data'] = generatedImageBase64
+                
                 # generate save the art in the droplet
-                # saveBase64Image(response["taskID"], generatedImageBase64)
-                saveBase64Image("1", generatedImageBase64)
+                saveBase64Image(taskUserID, generatedImageBase64)
+                # saveBase64Image("1", generatedImageBase64)
+
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
