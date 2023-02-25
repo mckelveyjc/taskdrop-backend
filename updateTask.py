@@ -7,7 +7,7 @@ from urllib.parse import urlparse, parse_qs
 from generateArt import openAIArtRequest
 # from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
-from manageImages import addImgToDb
+from manageImagesInDB import addImgToDb
 # from manageImages import cat
 
 logging.basicConfig(level=logging.DEBUG)
@@ -163,7 +163,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 
                 # generate save the art in the droplet
                 # the below line is the proper one, not sure how to get it to work atm though
-                # saveBase64Image(taskUserID, generatedImageBase64)
+                # (not you!) saveBase64Image(taskUserID, generatedImageBase64)
+                # addImgToDb(taskUserID, generatedImageBase64)
                 # you'd also need something similar to this at the top:
                 # taskUserID = response["taskID"]
                 # saveBase64Image("1", generatedImageBase64)
