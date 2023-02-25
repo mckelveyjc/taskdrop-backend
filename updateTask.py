@@ -4,10 +4,11 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-# from generateArt import createPrompt, openAIArtRequest
+from generateArt import createPrompt, openAIArtRequest
 # from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
 from manageImages import saveBase64Image, cat
+# from manageImages import cat
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -154,7 +155,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             # responseBody['data'] = numCompletedTasks
             if (numCompletedTasks >= 5): # should be === 5 eventually
                 # create a piece of art based on tasks
-                generatedImageBase64 = openAIArtRequest()
+                # generatedImageBase64 = openAIArtRequest()
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
                 # saveBase64Image("1", generatedImageBase64)
