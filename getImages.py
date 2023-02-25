@@ -47,8 +47,7 @@ class BaseAppService(BaseHTTPRequestHandler):
         if '/get-images' in path:
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
 
-            # response = "Python service is up and running!"
-            response = "Cat"
+            response = "Python service is up and running!"
 
             responseBody['data'] = response
 
@@ -72,8 +71,8 @@ class BaseAppService(BaseHTTPRequestHandler):
         # has configured your web server. You will need to communicate with your DevOps to decide on these
 
         if path == '/get-images':
-            imgFileNameArray = getImageNames(response["taskUserID"])
-            imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
+            # imgFileNameArray = getImageNames(response["taskUserID"])
+            # imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             # responseBody['data'] = imgUrlArray
             responseBody['data'] = "cat"
