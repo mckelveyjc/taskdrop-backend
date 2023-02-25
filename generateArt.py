@@ -47,8 +47,10 @@ def openAIArtRequest():
     )
     # generatedImageUrl = generatedImageData["data"][0]["url"]
     # return generatedImageUrl
-    saveBase64Image(generatedImageData["data"][0]["b64_json"])
-    return generatedImageData
+    # not sure if this logic should be done in updateTask. feels like it should but I'm just not sure.
+    # i'll ask Dr. Michaels about that this coming week.
+    generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+    return generatedImageBase64
 
 print(openAIArtRequest())
 # print(createPrompt())

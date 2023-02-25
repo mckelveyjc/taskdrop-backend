@@ -4,9 +4,9 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-import openai
 from generateArt import createPrompt, openAIArtRequest
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
+from manageImages import saveBase64Image
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -151,9 +151,11 @@ class BaseAppService(BaseHTTPRequestHandler):
             numCompletedTasks = getNumCompletedTasks()
             responseBody['data'] = numCompletedTasks
             if (numCompletedTasks >= 5): # should be === 5 eventually
-                responseBody['data'] = openAIArtRequest()
+                # create a piece of art based on tasks
+                generateImageBase64 = openAIArtRequest()
+                # generate save the art in the droplet
+                saveBase64Image(generateImageBase64)
                 # clearRecentlyCompletedTasks() # do this when we're done testing
-                # ok what I need to do is add the image from the AI art request to the droplet 
                 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
