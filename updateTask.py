@@ -5,7 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 import openai
-from generateArt import createPrompt
+from generateArt import createPrompt, openAIArtRequest
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
 
 logging.basicConfig(level=logging.DEBUG)
@@ -150,7 +150,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             
             numCompletedTasks = getNumCompletedTasks()
             responseBody['data'] = numCompletedTasks
-            # if (numCompletedTasks == 5):
+            # if (numCompletedTasks >= 5): # should be === 5
             #     responseBody['data'] = openAIArtRequest()
 
 
