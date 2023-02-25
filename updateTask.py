@@ -4,8 +4,9 @@ import ast
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
-from generateArt import createPrompt, openAIArtRequest
-from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
+# from generateArt import createPrompt, openAIArtRequest
+# from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
+from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
 # from manageImages import saveBase64Image, cat
 
 logging.basicConfig(level=logging.DEBUG)
