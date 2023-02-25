@@ -98,4 +98,4 @@ def getImageNames(taskUserID):
             # print("MySQL connection is closed")
 
 # testing
-# print(getImageNames("1"))
+print(getImageNames("1"))
