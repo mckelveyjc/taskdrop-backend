@@ -2,7 +2,6 @@ import os
 import openai
 import random
 from getTasksFromDB import getTasksForPrompt
-from manageImages import saveBase64Image
 
 # this function takes three random tasks from the "recently_completed" table and generates an 
 #   prompt for the AI art generator based on that prompt
@@ -12,26 +11,26 @@ def createPrompt():
     # [('feed the dog',), ('eat veggies',), ('c',)]
     # print(getTasksForPrompt()[0][0])
 
-    # prompt = ""
-    # randomTasksAsTuples = getTasksForPrompt()
-    # for taskIndex in range(len(randomTasksAsTuples)):
-    #     prompt += randomTasksAsTuples[taskIndex][0] + ", "
+    prompt = ""
+    randomTasksAsTuples = getTasksForPrompt()
+    for taskIndex in range(len(randomTasksAsTuples)):
+        prompt += randomTasksAsTuples[taskIndex][0] + ", "
 
-    # randomArtStyleList = [
-    #     "picasso", 
-    #     "van gogh", 
-    #     "rembrandt", 
-    #     "cyber punk",
-    #     "medieval",
-    #     "wild west", 
-    #     "a 90s sitcom"
-    #     # any other crazy shit we can think of
-    # ]
+    randomArtStyleList = [
+        "picasso", 
+        "van gogh", 
+        "rembrandt", 
+        "cyber punk",
+        "medieval",
+        "wild west", 
+        "a 90s sitcom"
+        # any other crazy shit we can think of
+    ]
 
-    # prompt += "in the style of " + random.choice(randomArtStyleList)
-    # return prompt
+    prompt += "in the style of " + random.choice(randomArtStyleList)
+    return prompt
 
-    return "cat as han solo in the style of attack on titan"
+    # return "cat as han solo in the style of attack on titan"
 
 # this function takes the prompt and sends a request for an AI generated image to openAI
 # rename this just 'aiArtRequest()' eventually
@@ -47,8 +46,6 @@ def openAIArtRequest():
     )
     # generatedImageUrl = generatedImageData["data"][0]["url"]
     # return generatedImageUrl
-    # not sure if this logic should be done in updateTask. feels like it should but I'm just not sure.
-    # i'll ask Dr. Michaels about that this coming week.
     generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
     return generatedImageBase64
 
