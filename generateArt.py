@@ -2,6 +2,7 @@ import os
 import openai
 import random
 from getTasksFromDB import getTasksForPrompt
+from manageImages import saveBase64Image
 
 # this function takes three random tasks from the "recently_completed" table and generates an 
 #   prompt for the AI art generator based on that prompt
@@ -11,26 +12,29 @@ def createPrompt():
     # [('feed the dog',), ('eat veggies',), ('c',)]
     # print(getTasksForPrompt()[0][0])
 
-    prompt = ""
-    randomTasksAsTuples = getTasksForPrompt()
-    for taskIndex in range(len(randomTasksAsTuples)):
-        prompt += randomTasksAsTuples[taskIndex][0] + ", "
+    # prompt = ""
+    # randomTasksAsTuples = getTasksForPrompt()
+    # for taskIndex in range(len(randomTasksAsTuples)):
+    #     prompt += randomTasksAsTuples[taskIndex][0] + ", "
 
-    randomArtStyleList = [
-        "picasso", 
-        "van gogh", 
-        "rembrandt", 
-        "cyber punk",
-        "medieval",
-        "wild west", 
-        "a 90s sitcom"
-        # any other crazy shit we can think of
-    ]
+    # randomArtStyleList = [
+    #     "picasso", 
+    #     "van gogh", 
+    #     "rembrandt", 
+    #     "cyber punk",
+    #     "medieval",
+    #     "wild west", 
+    #     "a 90s sitcom"
+    #     # any other crazy shit we can think of
+    # ]
 
-    prompt += "in the style of " + random.choice(randomArtStyleList)
-    return prompt
+    # prompt += "in the style of " + random.choice(randomArtStyleList)
+    # return prompt
+
+    return "cat as han solo in the style of attack on titan"
 
 # this function takes the prompt and sends a request for an AI generated image to openAI
+# rename this just 'aiArtRequest()' eventually
 def openAIArtRequest():
     # openai.api_key = os.getenv("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")
     generatedPrompt = createPrompt()
@@ -38,10 +42,13 @@ def openAIArtRequest():
     generatedImageData = openai.Image.create(
         prompt= generatedPrompt,
         n=1,
-        size="1024x1024"
+        size="1024x1024",
+        response_format="b64_json"
     )
-    generatedImageUrl = generatedImageData["data"][0]["url"]
-    return generatedImageUrl
+    # generatedImageUrl = generatedImageData["data"][0]["url"]
+    # return generatedImageUrl
+    saveBase64Image(generatedImageData["data"][0]["b64_json"])
+    return generatedImageData
 
-# print(openAIArtRequest())
+print(openAIArtRequest())
 # print(createPrompt())

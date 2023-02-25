@@ -153,7 +153,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             if (numCompletedTasks >= 5): # should be === 5 eventually
                 responseBody['data'] = openAIArtRequest()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
-
+                # ok what I need to do is add the image from the AI art request to the droplet 
+                
         self.send_response(status)
         self.send_header("Content-type", "text/html")
         self.end_headers()
