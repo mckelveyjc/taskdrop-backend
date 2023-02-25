@@ -159,11 +159,11 @@ class BaseAppService(BaseHTTPRequestHandler):
                 generatedImageData = openAIArtRequest()
                 # responseBody['data'] = generatedImageData
                 generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
-                responseBody['data'] = generatedImageBase64
                 responseBody['data type'] = type(generatedImageBase64)
+                responseBody['data'] = generatedImageBase64
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
-                saveBase64Image("1", generatedImageBase64)
+                # saveBase64Image("1", generatedImageBase64)
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
