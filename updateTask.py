@@ -162,7 +162,7 @@ class BaseAppService(BaseHTTPRequestHandler):
                 responseBody['data'] = generatedImageBase64
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
-                saveBase64Image("1", generatedImageBase64)
+                # saveBase64Image("1", generatedImageBase64)
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
