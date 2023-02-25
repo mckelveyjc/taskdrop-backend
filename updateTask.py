@@ -150,15 +150,14 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskEnd"])
             
             numCompletedTasks = getNumCompletedTasks()
-            # responseBody['data'] = numCompletedTasks
-            if (numCompletedTasks >= 5): # should be === 5 eventually
+            responseBody['data'] = numCompletedTasks
+            # if (numCompletedTasks >= 5): # should be === 5 eventually
                 # create a piece of art based on tasks
                 # generatedImageBase64 = openAIArtRequest()
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
                 # saveBase64Image("1", generatedImageBase64)
                 # responseBody['data'] = cat()
-                responseBody['data'] = "fish"
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
         self.send_response(status)
