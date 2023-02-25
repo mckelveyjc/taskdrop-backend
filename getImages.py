@@ -41,7 +41,7 @@ class BaseAppService(BaseHTTPRequestHandler):
         status = self.HTTP_STATUS_RESPONSE_CODES['NOT_FOUND']
         responseBody = {}
 
-        if '/update-task' in path:
+        if '/get-images' in path:
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
 
             response = "Python service is up and running!"
