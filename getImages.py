@@ -72,6 +72,8 @@ class BaseAppService(BaseHTTPRequestHandler):
 
         if path == '/get-images':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
+            dataString = json.dumps(postBody)
+            response = ast.literal_eval(dataString)
             taskUserID = response["taskUserID"]
             # imgFileNameArray = getImageNames(response["taskUserID"])
             # imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
