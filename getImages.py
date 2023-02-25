@@ -75,7 +75,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
             taskUserID = response["taskUserID"]
-            # imgFileNameArray = getImageNames(response["taskUserID"])
+
+            imgFileNameArray = getImageNames(taskUserID)
             # imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
             # responseBody['data'] = imgUrlArray
             responseBody['data'] = "user id: " + taskUserID
