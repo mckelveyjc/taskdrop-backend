@@ -1,5 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
+# change this filename to "getStuffFromDB" or something like that because you're getting images from the
+#  dabase here too
 
 # needs to be renamed to "get all tasks from db"
 def getTasksFromDB():
@@ -60,3 +62,34 @@ def getTasksForPrompt():
             cursor.close()
             connection.close()
             # print("MySQL connection is closed")
+
+# this function gets the image names from the database
+def getImageNames(taskUserID):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='test_db',
+            user='python',
+            password='cosc4360')
+        if connection.is_connected():
+            db_Info = connection.get_server_info()
+            # print("Connected to MySQL Server version ", db_Info)
+            cursor = connection.cursor()
+            cursor.execute("select database()")
+            record = cursor.fetchone()
+
+            sqlGetImagesQuery = "select imageFileName from generated_images where taskUserID=%s"
+            value = (taskUserID,)
+            cursor.execute(sqlGetImagesQuery, value)
+            data = cursor.fetchall()
+            return data
+
+    except Error as e:
+        print("Error while connecting to MySQL", e)
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            # print("MySQL connection is closed")
+
+print(getImageNames("1"))
