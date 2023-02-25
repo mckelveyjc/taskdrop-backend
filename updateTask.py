@@ -150,8 +150,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             
             numCompletedTasks = getNumCompletedTasks()
             responseBody['data'] = numCompletedTasks
-            # if (numCompletedTasks >= 5): # should be === 5
-            #     responseBody['data'] = openAIArtRequest()
+            if (numCompletedTasks >= 5): # should be === 5
+                responseBody['data'] = openAIArtRequest()
 
 
         self.send_response(status)
