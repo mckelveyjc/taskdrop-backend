@@ -47,7 +47,10 @@ def openAIArtRequest():
     )
     # generatedImageUrl = generatedImageData["data"][0]["url"]
     # return generatedImageUrl
-    generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+
+    # generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+    generatedImageBase64 = "cat"
+    
     # testing
     # saveBase64Image("1", generatedImageBase64)
     return generatedImageBase64
