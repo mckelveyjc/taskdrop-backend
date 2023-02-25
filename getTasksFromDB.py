@@ -82,7 +82,12 @@ def getImageNames(taskUserID):
             value = (taskUserID,)
             cursor.execute(sqlGetImagesQuery, value)
             data = cursor.fetchall()
-            return data
+
+            imgFileNameArray = []
+            for imgIndex in range(len(data)):
+                imgFileNameArray.append(data[imgIndex][0])
+
+            return imgFileNameArray
 
     except Error as e:
         print("Error while connecting to MySQL", e)
@@ -92,4 +97,5 @@ def getImageNames(taskUserID):
             connection.close()
             # print("MySQL connection is closed")
 
-print(getImageNames("1"))
+# testing
+# print(getImageNames("1"))
