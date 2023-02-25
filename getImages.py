@@ -74,7 +74,8 @@ class BaseAppService(BaseHTTPRequestHandler):
             imgFileNameArray = getImageNames(response["taskUserID"])
             imgUrlArray = createImageUrls(response["taskUserID"], imgFileNameArray)
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-            responseBody['data'] = imgUrlArray
+            # responseBody['data'] = imgUrlArray
+            responseBody['data'] = "cat"
                 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
