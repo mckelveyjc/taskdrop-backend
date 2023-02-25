@@ -53,5 +53,5 @@ def openAIArtRequest():
     saveBase64Image("1", generatedImageBase64)
     return generatedImageBase64
 
-# print(openAIArtRequest())
+print(openAIArtRequest())
 # print(createPrompt())
