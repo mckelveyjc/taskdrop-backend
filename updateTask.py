@@ -7,7 +7,7 @@ from urllib.parse import urlparse, parse_qs
 from generateArt import openAIArtRequest
 # from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
 from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
-# from manageImages import saveBase64Image, cat
+from manageImages import saveBase64Image, cat
 # from manageImages import cat
 
 logging.basicConfig(level=logging.DEBUG)
@@ -157,10 +157,12 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # create a piece of art based on tasks
                 # generatedImageBase64 = openAIArtRequest()
                 generatedImageData = openAIArtRequest()
-                responseBody['data'] = generatedImageData
+                # responseBody['data'] = generatedImageData
+                generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+                responseBody['data'] = generatedImageBase64
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
-                # saveBase64Image("1", generatedImageBase64)
+                saveBase64Image("1", generatedImageBase64)
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
