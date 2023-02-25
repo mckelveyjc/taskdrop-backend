@@ -5,6 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 from getTasksFromDB import getImageNames
+from manageImagesInDB import createImageUrls
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -70,8 +71,10 @@ class BaseAppService(BaseHTTPRequestHandler):
         # has configured your web server. You will need to communicate with your DevOps to decide on these
 
         if path == '/get-images':
+            imgFileNameArray = getImageNames(response["taskID"])
+            imgUrlArray = createImageUrls(response["taskID"], imgFileNameArray)
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-            responseBody['data'] = 'Hello world'
+            responseBody['data'] = imgUrlArray
                 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
