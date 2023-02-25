@@ -156,7 +156,7 @@ class BaseAppService(BaseHTTPRequestHandler):
                 generatedImageBase64 = openAIArtRequest()
                 # generate save the art in the droplet
                 # saveBase64Image(response["taskID"], generateImageBase64)
-                # saveBase64Image("1", generatedImageBase64)
+                saveBase64Image("1", generatedImageBase64)
                 # clearRecentlyCompletedTasks() # do this when we're done testing
                 
         self.send_response(status)
