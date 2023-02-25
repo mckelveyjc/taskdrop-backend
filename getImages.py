@@ -67,7 +67,7 @@ class BaseAppService(BaseHTTPRequestHandler):
         # These path endpoints can be very picky sometimes, and are very much connected to how your DevOps
         # has configured your web server. You will need to communicate with your DevOps to decide on these
 
-        if path == '/':
+        if path == '/get-images':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             responseBody['data'] = 'Hello world'
                 
