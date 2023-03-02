@@ -173,6 +173,7 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # clear recently_completed_tasks 
                 # doing this so we only use the most recent five tasks to create the art instead of all tasks ever
                 clearRecentlyCompletedTasks()
+                responseBody["artReady"] = True
             
             # actually don't need to do the below
             # always sends back the number of completed tasks (this val will always be 0-5)
