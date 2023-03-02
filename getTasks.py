@@ -87,6 +87,10 @@ class BaseAppService(BaseHTTPRequestHandler):
             responseBody = getTasksFromDB()
 
         elif path == '/get-tasks/get-num-completed':
+            status = self.HTTP_STATUS_RESPONSE_CODES['OK']    
+            dataString = json.dumps(postBody)
+            response = ast.literal_eval(dataString)
+        
             responseBody['data'] = "fish"
         
         self.send_response(status)
