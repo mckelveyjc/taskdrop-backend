@@ -5,6 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 from getTasksFromDB import getTasksFromDB
+from updateTasksInDB import getNumCompletedTasks
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -87,11 +88,11 @@ class BaseAppService(BaseHTTPRequestHandler):
             responseBody = getTasksFromDB()
 
         elif path == '/get-tasks/get-num-completed':
-            status = self.HTTP_STATUS_RESPONSE_CODES['OK']    
+            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
         
-            responseBody['data'] = "fish"
+            responseBody['numCompletedTasks'] = getNumCompletedTasks
         
         self.send_response(status)
         self.send_header("Content-type", "text/html")
