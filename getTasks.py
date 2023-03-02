@@ -92,7 +92,7 @@ class BaseAppService(BaseHTTPRequestHandler):
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
         
-            responseBody['numCompletedTasks'] = getNumCompletedTasks
+            responseBody['numCompletedTasks'] = getNumCompletedTasks()
         
         self.send_response(status)
         self.send_header("Content-type", "text/html")
