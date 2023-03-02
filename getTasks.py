@@ -86,6 +86,9 @@ class BaseAppService(BaseHTTPRequestHandler):
             #   certain user
             responseBody = getTasksFromDB()
 
+        elif path == '/get-tasks/get-num-completed':
+            responseBody['data'] = "fish"
+        
         self.send_response(status)
         self.send_header("Content-type", "text/html")
         self.end_headers()
