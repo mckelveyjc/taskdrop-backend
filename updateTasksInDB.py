@@ -197,7 +197,8 @@ def clearRecentlyCompletedTasks():
  
             sqlClearTasksQuery = "delete from recently_completed_tasks"
             cursor.execute(sqlClearTasksQuery)
-
+            connection.commit()
+            
             data = cursor.fetchall()
             return data
 
