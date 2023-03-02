@@ -212,3 +212,4 @@ def clearRecentlyCompletedTasks():
 # createTask("1")
 # completeTask("161", "1", "to-do", "to-do-list", "new-task", "new-task")
 # print(getNumCompletedTasks())
+clearRecentlyCompletedTasks()

@@ -5,7 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 from urllib.parse import urlparse, parse_qs
 from generateArt import openAIArtRequest
-from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks
+from updateTasksInDB import createTask, updateTaskName, updateTaskDay, completeTask, getNumCompletedTasks, clearRecentlyCompletedTasks
 from manageImagesInDB import addImgToDb, saveImage
 
 logging.basicConfig(level=logging.DEBUG)
@@ -169,6 +169,10 @@ class BaseAppService(BaseHTTPRequestHandler):
                 addImgToDb("1", imageFileName)
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
+
+                # clear recently_completed_tasks 
+                # doing this so we only use the most recent five tasks to create the art instead of all tasks ever
+                clearRecentlyCompletedTasks()
                 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
