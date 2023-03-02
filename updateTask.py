@@ -154,11 +154,11 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # create a piece of art based on tasks
                 # generatedImageBase64 = openAIArtRequest()
                 
-                # 1 # generatedImageData = openAIArtRequest()
+                generatedImageData = openAIArtRequest()
                 
                 # responseBody['data'] = generatedImageData
                 
-                # 2 # generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+                generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
                 
                 # addImgToDb("1", generatedImageBase64)
                 # responseBody['data'] = generatedImageBase64
@@ -170,8 +170,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # you'd also need something similar to this at the top:
                 # taskUserID = response["taskID"]
                 
-                # 3 # imageFileName = saveImage("1", generatedImageBase64)
-                # 4 # addImgToDb("1", imageFileName)
+                imageFileName = saveImage("1", generatedImageBase64)
+                addImgToDb("1", imageFileName)
                 
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
