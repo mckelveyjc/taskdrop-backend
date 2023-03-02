@@ -27,6 +27,7 @@ def createPrompt():
         # any other crazy shit we can think of
     ]
 
+    # timestamp on art?
     prompt += "in the style of " + random.choice(randomArtStyleList)
     return prompt
 
