@@ -174,7 +174,7 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # doing this so we only use the most recent five tasks to create the art instead of all tasks ever
                 clearRecentlyCompletedTasks()
             else:
-                response["numCompletedTasks"] = numCompletedTasks 
+                responseBody["numCompletedTasks"] = numCompletedTasks 
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")
