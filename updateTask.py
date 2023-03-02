@@ -153,9 +153,13 @@ class BaseAppService(BaseHTTPRequestHandler):
             if (numCompletedTasks >= 5): # should be === 5 eventually
                 # create a piece of art based on tasks
                 # generatedImageBase64 = openAIArtRequest()
-                generatedImageData = openAIArtRequest()
+                
+                # 1 # generatedImageData = openAIArtRequest()
+                
                 # responseBody['data'] = generatedImageData
-                generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+                
+                # 2 # generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+                
                 # addImgToDb("1", generatedImageBase64)
                 # responseBody['data'] = generatedImageBase64
                 
@@ -165,8 +169,10 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # addImgToDb(taskUserID, generatedImageBase64)
                 # you'd also need something similar to this at the top:
                 # taskUserID = response["taskID"]
-                imageFileName = saveImage("1", generatedImageBase64)
-                addImgToDb("1", imageFileName)
+                
+                # 3 # imageFileName = saveImage("1", generatedImageBase64)
+                # 4 # addImgToDb("1", imageFileName)
+                
                 # responseBody['data'] = cat()
                 # clearRecentlyCompletedTasks() # do this when we're done testing
 
@@ -174,7 +180,8 @@ class BaseAppService(BaseHTTPRequestHandler):
                 # doing this so we only use the most recent five tasks to create the art instead of all tasks ever
                 clearRecentlyCompletedTasks()
                 responseBody["artReady"] = True
-            
+            else:
+                responseBody["artReady"] = False
             # actually don't need to do the below
             # always sends back the number of completed tasks (this val will always be 0-5)
             # responseBody["numCompletedTasks"] = numCompletedTasks
