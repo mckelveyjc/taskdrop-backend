@@ -52,7 +52,8 @@ def getTasksForPrompt():
 
             # now let's select three random tasks
             # cursor.execute("select taskName from tasks order by rand() limit 3;")
-            cursor.execute("select taskName from recently_completed_tasks order by rand() limit 3;")
+            # actually just gets all of them. whay not? can edit code later
+            cursor.execute("select taskName from recently_completed_tasks order by rand() limit 5;")
             data = cursor.fetchall()
             return data
     except Error as e:
