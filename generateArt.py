@@ -19,11 +19,13 @@ def createPrompt():
     randomArtStyleList = [
         "picasso", 
         "van gogh", 
-        "rembrandt", 
+        # "rembrandt", 
         "cyber punk",
         "medieval",
         "wild west", 
-        "a 90s sitcom"
+        "a 90s sitcom",
+        "salvador dali",
+        "star wars"
         # any other crazy shit we can think of
     ]
 
