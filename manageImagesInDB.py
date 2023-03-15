@@ -7,8 +7,8 @@ from connectToDB import excecuteQueryOnDB
 # adds a generated image filename to the "generated_images" table
 def addImgToDb(taskUserID, imageFileName):
     sqlInsertImgQuery = "insert into generated_images (taskUserID, imageFileName) values (%s, %s)"
-    values = (taskUserID,imageFileName)
-    excecuteQueryOnDB(sqlInsertImgQuery, values)
+    values = (taskUserID, imageFileName)
+    data = excecuteQueryOnDB(sqlInsertImgQuery, values)
 
     # try:
     #     connection = mysql.connector.connect(
