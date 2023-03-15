@@ -10,33 +10,6 @@ def addImgToDb(taskUserID, imageFileName):
     values = (taskUserID, imageFileName)
     excecuteQueryOnDB(sqlInsertImgQuery, "insert", values)
 
-    # try:
-    #     connection = mysql.connector.connect(
-    #         host='localhost',
-    #         database='test_db',
-    #         user='python',
-    #         password='cosc4360')
-    #     if connection.is_connected():
-    #         db_Info = connection.get_server_info()
-    #         cursor = connection.cursor()
-    #         cursor.execute("select database();")
-    #         record = cursor.fetchone()
- 
-    #         sqlInsertImgQuery = "insert into generated_images (taskUserID, imageFileName) values (%s, %s)"
-    #         values = (taskUserID,imageFileName)
-    #         cursor.execute(sqlInsertImgQuery, values)
-    #         connection.commit()
-
-    #         data = cursor.fetchall()
-    #         return data
-
-    # except Error as e:
-    #     print("Error while connecting to MySQL", e)
-    # finally:
-    #     if connection.is_connected():
-    #         cursor.close()
-    #         connection.close()
-
 # takes image as a base 64 and a user's ID
 # converts image from base 64 to a regular image & stores it in server
 # for now, image is stored in /home/sr-project/user-images/{user's ID #}
