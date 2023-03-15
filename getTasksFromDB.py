@@ -93,6 +93,7 @@ def getImageNames(taskUserID):
 
     except Error as e:
         print("Error while connecting to MySQL", e)
+        
     finally:
         if connection.is_connected():
             cursor.close()

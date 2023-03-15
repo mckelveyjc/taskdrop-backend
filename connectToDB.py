@@ -18,3 +18,11 @@ def excecuteQueryOnDB(query, values=None):
 
         data = cursor.fetchall()
         return data
+    
+    except Error as e:
+        print("Error while connecting to MySQL", e)
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
