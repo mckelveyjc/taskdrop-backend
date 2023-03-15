@@ -12,6 +12,7 @@ def excecuteQueryOnDB(sqlQuery, values=None):
         if connection.is_connected():
             db_Info = connection.get_server_info()
             cursor = connection.cursor(buffered=True)
+            insertCursor = conn.cursor()
             cursor.execute("select database();")
             record = cursor.fetchone()
  
@@ -22,8 +23,8 @@ def excecuteQueryOnDB(sqlQuery, values=None):
             
             connection.commit()
 
-            data = cursor.fetchall()
-            return data
+            # data = cursor.fetchall()
+            # return data
     
     except Error as e:
         print("Error while connecting to MySQL", e)
