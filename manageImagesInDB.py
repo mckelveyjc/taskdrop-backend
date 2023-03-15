@@ -2,35 +2,40 @@ import mysql.connector
 from mysql.connector import Error
 import base64
 import random
+from connectToDB import excecuteQueryOnDB
 
 # adds a generated image filename to the "generated_images" table
 def addImgToDb(taskUserID, imageFileName):
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='test_db',
-            user='python',
-            password='cosc4360')
-        if connection.is_connected():
-            db_Info = connection.get_server_info()
-            cursor = connection.cursor()
-            cursor.execute("select database();")
-            record = cursor.fetchone()
+    sqlInsertImgQuery = "insert into generated_images (taskUserID, imageFileName) values (%s, %s)"
+    values = (taskUserID,imageFileName)
+    excecuteQueryOnDB(sqlInsertImgQuery, values)
+
+    # try:
+    #     connection = mysql.connector.connect(
+    #         host='localhost',
+    #         database='test_db',
+    #         user='python',
+    #         password='cosc4360')
+    #     if connection.is_connected():
+    #         db_Info = connection.get_server_info()
+    #         cursor = connection.cursor()
+    #         cursor.execute("select database();")
+    #         record = cursor.fetchone()
  
-            sqlInsertImgQuery = "insert into generated_images (taskUserID, imageFileName) values (%s, %s)"
-            values = (taskUserID,imageFileName)
-            cursor.execute(sqlInsertImgQuery, values)
-            connection.commit()
+    #         sqlInsertImgQuery = "insert into generated_images (taskUserID, imageFileName) values (%s, %s)"
+    #         values = (taskUserID,imageFileName)
+    #         cursor.execute(sqlInsertImgQuery, values)
+    #         connection.commit()
 
-            data = cursor.fetchall()
-            return data
+    #         data = cursor.fetchall()
+    #         return data
 
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+    # except Error as e:
+    #     print("Error while connecting to MySQL", e)
+    # finally:
+    #     if connection.is_connected():
+    #         cursor.close()
+    #         connection.close()
 
 # takes image as a base 64 and a user's ID
 # converts image from base 64 to a regular image & stores it in server
@@ -59,3 +64,6 @@ def createImageUrls(taskUserID, imgFileNameArray):
         imgUrl = baseUrl + imageFileName
         imgUrlArray.append(imgUrl)
     return imgUrlArray
+
+# testing
+print(addImgToDb("1", "fish"))
