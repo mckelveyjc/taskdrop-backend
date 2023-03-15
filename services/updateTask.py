@@ -10,7 +10,7 @@ from manageImagesInDB import addImgToDb, saveImage
 
 logging.basicConfig(level=logging.DEBUG)
 
-
+# this service deals with task creation, updating task names / days, and completing tasks
 class BaseAppService(BaseHTTPRequestHandler):
 
     HTTP_STATUS_RESPONSE_CODES = {
@@ -18,14 +18,6 @@ class BaseAppService(BaseHTTPRequestHandler):
         'FORBIDDEN': HTTPStatus.FORBIDDEN,
         'NOT_FOUND': HTTPStatus.NOT_FOUND,
     }
-
-    # Here's a function to extract GET parameters from a URL
-    def extract_GET_parameters(self):
-        path = self.path
-        parsedPath = urlparse(path)
-        paramsDict = parse_qs(parsedPath.query)
-        logging.info('GET parameters received: ' + json.dumps(paramsDict, indent=4, sort_keys=True))
-        return paramsDict
 
     def extract_POST_Body(self):
         # The content-length HTTP header is where our POST data will be in the request. So we'll need to
@@ -36,29 +28,6 @@ class BaseAppService(BaseHTTPRequestHandler):
         logging.info('POST Body received: ' +
                      json.dumps(postBodyDict, indent=4, sort_keys=True))
         return postBodyDict
-
-    ## GET REQUEST HANDLING ##
-
-    def do_GET(self):
-        path = self.path
-        paramsDict = self.extract_GET_parameters()
-        status = self.HTTP_STATUS_RESPONSE_CODES['NOT_FOUND']
-        responseBody = {}
-
-        if '/update-task' in path:
-            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-
-            response = "Python service is up and running!"
-
-            responseBody['data'] = response
-
-        self.send_response(status)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        response = json.dumps(responseBody)
-        logging.info('Response: ' + response)
-        byteStringResponse = response.encode('utf-8')
-        self.wfile.write(byteStringResponse)
     
     def do_POST(self):
         path = self.path
@@ -71,42 +40,14 @@ class BaseAppService(BaseHTTPRequestHandler):
         if path == '/':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             responseBody['data'] = 'Hello world'
-
-        # keeping the below here just because NGINX is wierd sometimes and needs a path to match
-        #  exactly what's in sites-available
-        # elif path == '/update-task': 
-        # # we'll include the rest (/update-task/delete, /change-time) later
-        # # elif path == 'update-task/update-day': # should be update-task-day
-
-        #     status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-            
-        #     dataString = json.dumps(postBody)
-        #     response = ast.literal_eval(dataString)
-        #     # eventually this should be taskUserID
-        #     # responseBody = getTasksFromDB(response["taskUser"]) 
-        #     # get all tasks from db
-        #     # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
-        #     #   certain user
-        #     # responseBody = getTasksFromDB()
-        #     responseBody = "cat"
         
         elif path == '/update-task/create-task':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
 
-            # createTask(response["taskUser"]) # should probably be "taskUserID"
-
-            responseBody = createTask(response["taskUser"]) # should probably be "taskUserID"
-            # testing shit:
-            # createTask("1", "created-task", "testday", "00:00", "00:01")
-            # createTask(
-            #     response["taskUser"], 
-            #     response["taskName"], 
-            #     response["taskDay"], 
-            #     response["taskStart"], 
-            #     response["taskEnd"])
-            # responseBody = "/update-task/create-task"
+            # adds a task with default data into db
+            responseBody = createTask(response["taskUser"])
 
         elif path == '/update-task/update-name':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
@@ -114,16 +55,9 @@ class BaseAppService(BaseHTTPRequestHandler):
             response = ast.literal_eval(dataString)
 
             updateTaskName(response["taskID"], response["newName"])
-            # testing shit:
-            # responseBody = "/update-task/update-name"
 
+        # should be: update-task-location for clarity
         elif path == '/update-task/update-day':
-            # we'll include the rest (/update-task/delete, /change-time) later
-            # should be update-task-day
-
-            # need to take the taskID as a parameter
-            # need to update the task day in the database
-            # something like: updateTasksInDB("change-day", "new-day")
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
@@ -131,12 +65,12 @@ class BaseAppService(BaseHTTPRequestHandler):
             updateTaskDay(response["taskID"], response["newDay"])
         
         elif path == '/update-task/complete-task':
-            # we need to take all of the tasks information here so we can move it all to 
-            #  the other database. 
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-            # save taskUser as a variable eventually
+
+            # we need all of the task information here so we can move it all to 
+            #   recently_completed_tasks
             completeTask(
                 response["taskID"], 
                 response["taskUser"],
@@ -146,42 +80,29 @@ class BaseAppService(BaseHTTPRequestHandler):
                 response["taskEnd"])
             
             numCompletedTasks = getNumCompletedTasks()
-            # responseBody['data'] = numCompletedTasks
-            if (numCompletedTasks >= 5): # should be === 5 eventually
-                # create a piece of art based on tasks
-                # generatedImageBase64 = openAIArtRequest()
-                
+            if (numCompletedTasks >= 5): # >= instead of == here in case of overflow
+                # create a piece of art based on tasks                
                 generatedImageData = openAIArtRequest()
-                
-                # responseBody['data'] = generatedImageData
-                
-                generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
-                
-                # addImgToDb("1", generatedImageBase64)
-                # responseBody['data'] = generatedImageBase64
-                
-                # generate save the art in the droplet
-                # the below line is the proper one, not sure how to get it to work atm though
-                # (not you!) saveBase64Image(taskUserID, generatedImageBase64)
-                # addImgToDb(taskUserID, generatedImageBase64)
-                # you'd also need something similar to this at the top:
-                # taskUserID = response["taskID"]
-                
-                imageFileName = saveImage("1", generatedImageBase64)
-                addImgToDb("1", imageFileName)
-                
-                # responseBody['data'] = cat()
-                # clearRecentlyCompletedTasks() # do this when we're done testing
 
-                # clear recently_completed_tasks 
-                # doing this so we only use the most recent five tasks to create the art instead of all tasks ever
+                # get the base64 of that image from the dictionary             
+                generatedImageBase64 = generatedImageData["data"][0]["b64_json"]
+    
+                # saveImage returns the image filename
+                imageFileName = saveImage("1", generatedImageBase64)
+
+                # add that filename to the generated_images database
+                addImgToDb("1", imageFileName)
+ 
+                # clear recently_completed_tasks
+                # doing this so we only use the most recent five tasks to create the art instead of all completed tasks ever
                 clearRecentlyCompletedTasks()
+    
+                # tell the frontend that the art is ready
                 responseBody["artReady"] = True
+
             else:
+                # if the user hasn't completed five tasks, they don't get any art
                 responseBody["artReady"] = False
-            # actually don't need to do the below
-            # always sends back the number of completed tasks (this val will always be 0-5)
-            # responseBody["numCompletedTasks"] = numCompletedTasks
 
         self.send_response(status)
         self.send_header("Content-type", "text/html")

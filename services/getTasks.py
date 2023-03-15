@@ -9,7 +9,7 @@ from updateTasksInDB import getNumCompletedTasks
 
 logging.basicConfig(level=logging.DEBUG)
 
-# this service ... 
+# this service returns an object of tasks and the number of completed tasks
 class BaseAppService(BaseHTTPRequestHandler):
 
     HTTP_STATUS_RESPONSE_CODES = {
@@ -17,14 +17,6 @@ class BaseAppService(BaseHTTPRequestHandler):
         'FORBIDDEN': HTTPStatus.FORBIDDEN,
         'NOT_FOUND': HTTPStatus.NOT_FOUND,
     }
-
-    # Here's a function to extract GET parameters from a URL
-    def extract_GET_parameters(self):
-        path = self.path
-        parsedPath = urlparse(path)
-        paramsDict = parse_qs(parsedPath.query)
-        logging.info('GET parameters received: ' + json.dumps(paramsDict, indent=4, sort_keys=True))
-        return paramsDict
 
     def extract_POST_Body(self):
         # The content-length HTTP header is where our POST data will be in the request. So we'll need to
@@ -35,29 +27,6 @@ class BaseAppService(BaseHTTPRequestHandler):
         logging.info('POST Body received: ' +
                      json.dumps(postBodyDict, indent=4, sort_keys=True))
         return postBodyDict
-
-    ## GET REQUEST HANDLING ##
-
-    def do_GET(self):
-        path = self.path
-        paramsDict = self.extract_GET_parameters()
-        status = self.HTTP_STATUS_RESPONSE_CODES['NOT_FOUND']
-        responseBody = {}
-
-        if '/get-tasks' in path:
-            status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-
-            response = "Python service is up and running!"
-
-            responseBody['data'] = response
-
-        self.send_response(status)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        response = json.dumps(responseBody)
-        logging.info('Response: ' + response)
-        byteStringResponse = response.encode('utf-8')
-        self.wfile.write(byteStringResponse)
     
     def do_POST(self):
         path = self.path
@@ -72,24 +41,21 @@ class BaseAppService(BaseHTTPRequestHandler):
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             responseBody['data'] = 'Hello world'
 
+        # returns a dictionary of all tasks in the db
         elif path == '/get-tasks':
-
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
-            
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-            # eventually this should be taskUserID
-            # responseBody = getTasksFromDB(response["taskUser"]) 
-            # get all tasks from db
-            # eventually, we'll want to pass taskUser (eventually taskUserID) to get all the tasks that belong to a
-            #   certain user
+            # eventually this should use the ID of a given user to retrieve their tasks (not just all tasks)
             responseBody = getTasksFromDB()
 
+        # returns a string that represents the # of completed tasks
         elif path == '/get-tasks/get-num-completed':
             status = self.HTTP_STATUS_RESPONSE_CODES['OK']
             dataString = json.dumps(postBody)
             response = ast.literal_eval(dataString)
-        
+            # eventually this should use the ID of a given user to retrieve the number of their completed
+            #   tasks (not just all completed tasks)
             responseBody['numCompletedTasks'] = getNumCompletedTasks()
         
         self.send_response(status)
