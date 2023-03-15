@@ -12,7 +12,7 @@ def excecuteQueryOnDB(sqlQuery, values=None):
         if connection.is_connected():
             db_Info = connection.get_server_info()
             cursor = connection.cursor(buffered=True)
-            insertCursor = conn.cursor()
+            insertCursor = connection.cursor()
             cursor.execute("select database();")
             record = cursor.fetchone()
  
