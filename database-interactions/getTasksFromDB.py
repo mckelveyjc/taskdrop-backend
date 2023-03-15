@@ -2,8 +2,9 @@ import mysql.connector
 from mysql.connector import Error
 # change this filename to "getStuffFromDB" or something like that because you're getting images from the
 #  dabase here too
+# make it all class based 
 
-# needs to be renamed to "get all tasks from db"
+# gets all the tasks from the database
 def getTasksFromDB():
     try:
         connection = mysql.connector.connect(
@@ -13,14 +14,11 @@ def getTasksFromDB():
             password='cosc4360')
         if connection.is_connected():
             db_Info = connection.get_server_info()
-            # print("Connected to MySQL Server version ", db_Info)
             cursor = connection.cursor()
             cursor.execute("select database();")
             record = cursor.fetchone()
-            # print("You're connected to database: ", record)
-            # we'll do the below eventually. for some reason it keep returning null
-            # cursor.execute("select * from tasks where taskUser=?", (1))
-            # we'll do the below instead for now
+
+            # eventually: make this work for multiple users
             cursor.execute("select * from tasks")
             data = cursor.fetchall()
             return data
@@ -32,10 +30,8 @@ def getTasksFromDB():
             connection.close()
             # print("MySQL connection is closed")
 
-# this function gets three random tasks from the "recently_completed_tasks" table 
-# will be used in generateArt. 
-# for now I'm getting the tasks from the normal "tasks" table just for testing
-# eventually we should orchestrate this so that it doesn't get repeated tasks
+# gets five random tasks from the "recently_completed_tasks" table 
+#   to be used for the AI art generation
 def getTasksForPrompt():
     try:
         connection = mysql.connector.connect(
@@ -45,26 +41,23 @@ def getTasksForPrompt():
             password='cosc4360')
         if connection.is_connected():
             db_Info = connection.get_server_info()
-            # print("Connected to MySQL Server version ", db_Info)
             cursor = connection.cursor()
             cursor.execute("select database()")
-            record = cursor.fetchone()
 
-            # now let's select three random tasks
-            # cursor.execute("select taskName from tasks order by rand() limit 3;")
-            # actually just gets all of them. whay not? can edit code later
+            record = cursor.fetchone()
             cursor.execute("select taskName from recently_completed_tasks order by rand() limit 5;")
             data = cursor.fetchall()
             return data
+
     except Error as e:
         print("Error while connecting to MySQL", e)
+
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
-            # print("MySQL connection is closed")
 
-# this function gets the image names from the database
+# gets the image names from the generated_images database for a specific user
 def getImageNames(taskUserID):
     try:
         connection = mysql.connector.connect(
@@ -74,7 +67,6 @@ def getImageNames(taskUserID):
             password='cosc4360')
         if connection.is_connected():
             db_Info = connection.get_server_info()
-            # print("Connected to MySQL Server version ", db_Info)
             cursor = connection.cursor()
             cursor.execute("select database()")
             record = cursor.fetchone()
@@ -96,7 +88,3 @@ def getImageNames(taskUserID):
         if connection.is_connected():
             cursor.close()
             connection.close()
-            # print("MySQL connection is closed")
-
-# testing
-# print(getImageNames("1"))
