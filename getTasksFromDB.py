@@ -20,37 +20,15 @@ def getTasksForPrompt():
 
 # gets the image names from the generated_images database for a specific user
 def getImageNames(taskUserID):
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='test_db',
-            user='python',
-            password='cosc4360')
-        if connection.is_connected():
-            db_Info = connection.get_server_info()
-            cursor = connection.cursor()
-            cursor.execute("select database()")
-            record = cursor.fetchone()
-
-            sqlGetImagesQuery = "select imageFileName from generated_images where taskUserID=%s"
-            value = (taskUserID,)
-            cursor.execute(sqlGetImagesQuery, value)
-            data = cursor.fetchall()
-
-            imgFileNameArray = []
-            for imgIndex in range(len(data)):
-                imgFileNameArray.append(data[imgIndex][0])
-
-            return imgFileNameArray
-
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+    sqlGetImagesQuery = "select imageFileName from generated_images where taskUserID=%s"
+    value = (taskUserID,)
+    data = excecuteQueryOnDB(sqlGetImagesQuery, value)
+    imgFileNameArray = []
+    for imgIndex in range(len(data)):
+        imgFileNameArray.append(data[imgIndex][0])
+    return imgFileNameArray
 
 # testing
 # print(getTasksFromDB())
-print(getTasksForPrompt())
+# print(getTasksForPrompt())
+print(getImageNames("1"))
