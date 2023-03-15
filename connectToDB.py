@@ -1,3 +1,6 @@
+import mysql.connector
+from mysql.connector import Error
+
 def excecuteQueryOnDB(sqlQuery, values=None):
     try:
         connection = mysql.connector.connect(
