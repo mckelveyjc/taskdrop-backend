@@ -31,7 +31,6 @@ def addImgToDb(taskUserID, imageFileName):
         if connection.is_connected():
             cursor.close()
             connection.close()
-            # print("MySQL connection is closed")
 
 # takes image as a base 64 and a user's ID
 # converts image from base 64 to a regular image & stores it in server

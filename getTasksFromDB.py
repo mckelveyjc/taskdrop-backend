@@ -1,34 +1,43 @@
 import mysql.connector
 from mysql.connector import Error
+from connectToDB import excecuteQueryOnDB
+
+
 # change this filename to "getStuffFromDB" or something like that because you're getting images from the
 #  dabase here too
-# make it all class based 
 
 # gets all the tasks from the database
 def getTasksFromDB():
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='test_db',
-            user='python',
-            password='cosc4360')
-        if connection.is_connected():
-            db_Info = connection.get_server_info()
-            cursor = connection.cursor()
-            cursor.execute("select database();")
-            record = cursor.fetchone()
+    sqlGetTasksQuery = "select * from tasks"
+    data = excecuteQueryOnDB(sqlGetTasksQuery)
+    return data
+        
+# # gets all the tasks from the database
+# def getTasksFromDB():
+#     try:
+#         connection = mysql.connector.connect(
+#             host='localhost',
+#             database='test_db',
+#             user='python',
+#             password='cosc4360')
+#         if connection.is_connected():
+#             db_Info = connection.get_server_info()
+#             cursor = connection.cursor()
+#             cursor.execute("select database();")
+#             record = cursor.fetchone()
 
-            # eventually: make this work for multiple users
-            cursor.execute("select * from tasks")
-            data = cursor.fetchall()
-            return data
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            # print("MySQL connection is closed")
+#             # eventually: make this work for multiple users
+#             cursor.execute("select * from tasks")
+#             data = cursor.fetchall()
+#             return data
+
+#     except Error as e:
+#         print("Error while connecting to MySQL", e)
+
+#     finally:
+#         if connection.is_connected():
+#             cursor.close()
+#             connection.close()
 
 # gets five random tasks from the "recently_completed_tasks" table 
 #   to be used for the AI art generation
@@ -88,3 +97,6 @@ def getImageNames(taskUserID):
         if connection.is_connected():
             cursor.close()
             connection.close()
+
+# testing
+print(getTasksFromDB())
