@@ -1,7 +1,7 @@
 import os
 import openai
 import random
-from getTasksFromDB import getTasksForPrompt
+from getInfoFromDB import getTasksForPrompt
 
 # this function takes three random tasks from the "recently_completed" table and generates an 
 #   prompt for the AI art generator based on that prompt

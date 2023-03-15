@@ -27,8 +27,3 @@ def getImageNames(taskUserID):
     for imgIndex in range(len(data)):
         imgFileNameArray.append(data[imgIndex][0])
     return imgFileNameArray
-
-# testing
-# print(getTasksFromDB())
-# print(getTasksForPrompt())
-print(getImageNames("1"))
