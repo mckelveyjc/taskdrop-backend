@@ -2,6 +2,7 @@ import os
 import openai
 import random
 from getInfoFromDB import getTasksForPrompt
+import config
 
 # this function takes three random tasks from the "recently_completed" table and generates an 
 #   prompt for the AI art generator based on that prompt
@@ -32,7 +33,7 @@ def createPrompt():
 # this function takes the prompt and sends a request for an AI generated image to openAI
 def openAIArtRequest():
     generatedPrompt = createPrompt()
-    openai.api_key = "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"
+    openai.api_key = config.api_key
     generatedImageData = openai.Image.create(
         prompt= generatedPrompt,
         n=1,
