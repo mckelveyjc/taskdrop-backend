@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-def excecuteQueryOnDB(sqlQuery, values=None):
+def excecuteQueryOnDB(sqlQuery, fetchOrInsert, values=None):
     try:
         connection = mysql.connector.connect(
         host='localhost',   
@@ -23,8 +23,9 @@ def excecuteQueryOnDB(sqlQuery, values=None):
             
             connection.commit()
 
-            # data = cursor.fetchall()
-            # return data
+            if (fetchOrInsert == "fetch"):
+                data = cursor.fetchall()
+                return data
     
     except Error as e:
         print("Error while connecting to MySQL", e)
