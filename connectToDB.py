@@ -4,14 +4,14 @@ from mysql.connector import Error
 def excecuteQueryOnDB(sqlQuery, values=None):
     try:
         connection = mysql.connector.connect(
-        host='localhost',
+        host='localhost',   
         database='test_db',
         user='python',
         password='cosc4360')
         
         if connection.is_connected():
             db_Info = connection.get_server_info()
-            cursor = connection.cursor()
+            cursor = connection.cursor(buffered=True)
             cursor.execute("select database();")
             record = cursor.fetchone()
  
