@@ -1,6 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 
+# TO DO: REFACTOR TO USE connectToDB
+ 
 # inserts a task with given user ID & default values into the tasks table
 def createTask(taskUser):
     try:
